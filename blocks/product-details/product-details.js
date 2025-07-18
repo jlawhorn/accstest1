@@ -46,7 +46,7 @@ export default async function decorate(block) {
         <div class="product-details__header"></div>
         <div class="product-details__price"></div>
         <div class="product-details__ratings"></div>
-        <div class="test">Test</div>
+        <div class="product-details__">Test</div>
         <div class="product-details__short-description"></div>
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
@@ -142,6 +142,7 @@ export default async function decorate(block) {
     pdpRendered.render(ProductPrice, {})($price),
 
     // Short Description
+    console.log('ProductShortDescription');
     pdpRendered.render(ProductShortDescription, {})($shortDescription),
 
     // Configuration - Swatches
