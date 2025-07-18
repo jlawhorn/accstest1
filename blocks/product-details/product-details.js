@@ -142,7 +142,6 @@ export default async function decorate(block) {
     pdpRendered.render(ProductPrice, {})($price),
 
     // Short Description
-    console.log('ProductShortDescription');
     pdpRendered.render(ProductShortDescription, {})($shortDescription),
 
     // Configuration - Swatches
@@ -213,6 +212,8 @@ export default async function decorate(block) {
     // Attributes
     pdpRendered.render(ProductAttributes, {})($attributes),
   ]);
+
+  console.log('ProductShortDescription');
 
   // Lifecycle Events
   events.on(
