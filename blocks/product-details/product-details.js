@@ -213,7 +213,7 @@ export default async function decorate(block) {
     pdpRendered.render(ProductAttributes, {})($attributes),
   ]);
 
-  console.log('ProductShortDescription');
+  console.warn('ProductShortDescription');
 
   // Lifecycle Events
   events.on(
