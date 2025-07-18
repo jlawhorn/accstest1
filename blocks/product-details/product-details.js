@@ -213,8 +213,6 @@ export default async function decorate(block) {
     pdpRendered.render(ProductAttributes, {})($attributes),
   ]);
 
-  console.warn('ProductShortDescription');
-
   // Lifecycle Events
   events.on(
     'pdp/valid',
