@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable no-console */
 
 import {
   InLineAlert,
@@ -14,7 +15,6 @@ import { render as pdpRendered } from '@dropins/storefront-pdp/render.js';
 // Containers
 import ProductHeader from '@dropins/storefront-pdp/containers/ProductHeader.js';
 import ProductPrice from '@dropins/storefront-pdp/containers/ProductPrice.js';
-import ProductShortDescription from '@dropins/storefront-pdp/containers/ProductShortDescription.js';
 import ProductOptions from '@dropins/storefront-pdp/containers/ProductOptions.js';
 import ProductQuantity from '@dropins/storefront-pdp/containers/ProductQuantity.js';
 import ProductDescription from '@dropins/storefront-pdp/containers/ProductDescription.js';
@@ -31,6 +31,7 @@ import '../../scripts/initializers/cart.js';
 export default async function decorate(block) {
   // eslint-disable-next-line no-underscore-dangle
   const product = events._lastEvent?.['pdp/data']?.payload ?? null;
+  console.log('product data', product);
   const labels = await fetchPlaceholders();
 
   // Layout
@@ -47,7 +48,7 @@ export default async function decorate(block) {
         <div class="product-details__price"></div>
         <div class="product-details__ratings"></div>
         <div class="product-details__">Test</div>
-        <div class="product-details__short-description"></div>
+        <div class="product-details__short-description">${product.shortDescription}</div>
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
           <div class="product-details__quantity__wrapper">
@@ -77,9 +78,6 @@ export default async function decorate(block) {
   const $galleryMobile = fragment.querySelector(
     '.product-details__right-column .product-details__gallery',
   );
-  const $shortDescription = fragment.querySelector(
-    '.product-details__short-description',
-  );
   const $options = fragment.querySelector('.product-details__options');
   const $quantity = fragment.querySelector('.product-details__quantity');
   const $addToCart = fragment.querySelector(
@@ -100,7 +98,6 @@ export default async function decorate(block) {
     _gallery,
     _header,
     _price,
-    _shortDescription,
     _options,
     _quantity,
     addToCart,
@@ -140,9 +137,6 @@ export default async function decorate(block) {
 
     // Price
     pdpRendered.render(ProductPrice, {})($price),
-
-    // Short Description
-    pdpRendered.render(ProductShortDescription, {})($shortDescription),
 
     // Configuration - Swatches
     pdpRendered.render(ProductOptions, {
