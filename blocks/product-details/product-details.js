@@ -18,7 +18,6 @@ import ProductPrice from '@dropins/storefront-pdp/containers/ProductPrice.js';
 import ProductOptions from '@dropins/storefront-pdp/containers/ProductOptions.js';
 import ProductQuantity from '@dropins/storefront-pdp/containers/ProductQuantity.js';
 import ProductDescription from '@dropins/storefront-pdp/containers/ProductDescription.js';
-import ProductAttributes from '@dropins/storefront-pdp/containers/ProductAttributes.js';
 import ProductGallery from '@dropins/storefront-pdp/containers/ProductGallery.js';
 
 // Libs
@@ -27,6 +26,26 @@ import { fetchPlaceholders } from '../../scripts/aem.js';
 // Initializers
 import { IMAGES_SIZES } from '../../scripts/initializers/pdp.js';
 import '../../scripts/initializers/cart.js';
+
+// Attribute Rendering
+const attributesList = ['weight'];
+
+const attributeFilter = (attributes) => {
+  if (!Array.isArray(attributes)) return [];
+  return attributes.filter((attr) => attributesList.includes(attr.name));
+};
+
+const attributeRender = (attributeArray) => {
+  if (attributeArray.length) {
+    return `<ul class="pdp-attributes custom-attribute-list">
+      ${attributeArray.map((attr) => `<li class="custom-attribute-item">
+        <span class="label">${attr.label}</span>:
+        <span class="value">${attr.value}</span>
+      </li>`)}
+    </ul>`;
+  }
+  return '';
+};
 
 export default async function decorate(block) {
   // eslint-disable-next-line no-underscore-dangle
@@ -63,7 +82,7 @@ export default async function decorate(block) {
           </div>
         </div>
         <div class="product-details__description"></div>
-        <div class="product-details__attributes"></div>
+        <div class="product-details__custom-attributes">${attributeRender(attributeFilter(product.attributes))}</div>
         <div class="product-details__sku">
           Product Code: ${product.sku}
         </div>
@@ -84,7 +103,6 @@ export default async function decorate(block) {
     '.product-details__buttons__add-to-cart',
   );
   const $description = fragment.querySelector('.product-details__description');
-  const $attributes = fragment.querySelector('.product-details__attributes');
   const $ratings = fragment.querySelector('.product-details__ratings');
 
   block.appendChild(fragment);
@@ -102,7 +120,6 @@ export default async function decorate(block) {
     _quantity,
     addToCart,
     _description,
-    _attributes,
   ] = await Promise.all([
     // Gallery (Mobile)
     pdpRendered.render(ProductGallery, {
@@ -202,9 +219,6 @@ export default async function decorate(block) {
 
     // Description
     pdpRendered.render(ProductDescription, {})($description),
-
-    // Attributes
-    pdpRendered.render(ProductAttributes, {})($attributes),
   ]);
 
   // Lifecycle Events
