@@ -47,6 +47,8 @@ const attributeRender = (attributeArray) => {
   return '';
 };
 
+const getAwesomeValue = (attributesArray) => attributesArray.find((attribute) => attribute.name === 'is_awesome');
+
 export default async function decorate(block) {
   // eslint-disable-next-line no-underscore-dangle
   const product = events._lastEvent?.['pdp/data']?.payload ?? null;
@@ -66,7 +68,7 @@ export default async function decorate(block) {
         <div class="product-details__header"></div>
         <div class="product-details__price"></div>
         <div class="product-details__ratings"></div>
-        <div class="product-details__">Test</div>
+        <div class="product-details__is-awesome">Is this awesome? ${getAwesomeValue(product.attributes).value}</div>
         <div class="product-details__short-description">${product.shortDescription}</div>
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
