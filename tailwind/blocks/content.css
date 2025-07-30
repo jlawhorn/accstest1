@@ -1,0 +1,9 @@
+.default-content-wrapper {
+    & > :first-child {
+        margin-top: 0;
+    }
+
+    & p:empty {
+        @apply hidden;
+    }
+}

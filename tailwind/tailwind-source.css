@@ -1,0 +1,19 @@
+@import "tailwindcss/base";
+@import "base/structure.css";
+
+@import "tailwindcss/components";
+@import "components/button.css" layer(components);
+@import "components/modal.css" layer(components);
+@import "components/nav.css" layer(components);
+
+/* EDS Block */
+@import "blocks/fragment.css";
+@import "blocks/content.css";
+@import "blocks/header.css";
+@import "blocks/footer.css";
+@import "blocks/hero.css";
+@import "blocks/messages.css";
+@import "blocks/cards.css";
+@import "blocks/columns.css";
+
+@import "tailwindcss/utilities";

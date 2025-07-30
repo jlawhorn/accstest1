@@ -1,0 +1,32 @@
+footer {
+    @apply bg-white text-primary;
+
+    & :is(p, ul) {
+        margin-block: 0;
+    }
+
+    & :any-link:not(.btn) {
+        @apply font-normal text-current text-blue-100;
+    }
+
+    & ul > li {
+        @apply mt-2;
+    }
+
+    & p:has(+ ul) {
+        @apply mb-4 font-bold uppercase;
+    }
+
+    & .columns > div {
+        gap: var(--footer-columns-gap, 1.5rem);
+    }
+
+    & .default-content-wrapper:last-of-type {
+        @apply text-blue-200 text-sm;
+
+        &::before {
+            @apply block border-t border-green-300 pb-8;
+            content: '';
+        }
+    }
+}
