@@ -8,6 +8,7 @@ scripts/__dropins__
 scripts/commerce-events-collector.js
 scripts/commerce-events-sdk.js
 scripts/widgets
+tailwind/
 plugins/
 cypress/
 styles/lazy-styles.css
