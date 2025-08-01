@@ -1,5 +1,6 @@
 @import "tailwindcss/base";
 @import "base/structure.css";
+@import "base/dropins.css";
 
 @import "tailwindcss/components";
 @import "components/button.css" layer(components);

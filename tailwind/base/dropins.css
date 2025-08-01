@@ -1,0 +1,8 @@
+.dropin-radio-button__label::before,
+.dropin-radio-button__label::after {
+    box-sizing: content-box;
+}
+
+.dropin-checkbox__checkbox[type='checkbox'] {
+    @apply hidden;
+}

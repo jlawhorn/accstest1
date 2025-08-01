@@ -1,6 +1,6 @@
-const { spacing } = require('tailwindcss/defaultTheme');
+const { spacing } = require('tailwindcss/defaultTheme.js');
 
-const colors = require('tailwindcss/colors');
+const colors = require('tailwindcss/colors.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -109,6 +109,7 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line global-require
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
   content: ['../*.html', '../scripts/scripts.js', '../blocks/**/*.js'],
 };
