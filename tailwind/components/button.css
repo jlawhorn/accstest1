@@ -1,24 +1,12 @@
 :is(.btn, .button, :where(main) button) {
     @apply inline-flex items-center not-italic no-underline cursor-pointer;
 
-    @screen md {
-        @apply text-lg;
-    }
-
-    @screen xl {
-        @apply text-base;
-    }
-
     svg {
         @apply inline-flex;
     }
 
     span {
         vertical-align: middle;
-    }
-
-    &:hover {
-        @apply bg-gray-600;
     }
 
     &:focus-visible {

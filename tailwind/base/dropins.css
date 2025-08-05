@@ -6,3 +6,11 @@
 .dropin-checkbox__checkbox[type='checkbox'] {
     @apply hidden;
 }
+
+.dropin-input--medium {
+    padding: 9px var(--spacing-small);
+}
+
+.dropin-input--icon-left {
+    padding-left: var(--icon-space);
+}

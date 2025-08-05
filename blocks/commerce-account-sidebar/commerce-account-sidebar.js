@@ -6,10 +6,10 @@ import { CUSTOMER_ORDERS_PATH } from '../../scripts/constants.js';
 export default async function decorate(block) {
   const fragment = await loadFragment('/customer/sidebar-fragment');
   const sidebarItemsConfig = fragment.querySelectorAll('.default-content-wrapper > ol > li');
-  const sidebarItems = Array.from(sidebarItemsConfig).map((item) => {
+  const sidebarItems = await Promise.all(Array.from(sidebarItemsConfig).map(async (item) => {
     const itemParams = Array.from(item.querySelectorAll('ol > li'));
     const itemConfig = {
-      itemTitle: item.childNodes[0]?.textContent.trim() || 'Default Title',
+      itemTitle: item.querySelector('p')?.textContent.trim() || 'Default Title',
       itemSubtitle: itemParams[0]?.innerText || '',
       itemLink: itemParams[1]?.innerText || '#',
       itemIcon: itemParams[2]?.innerText || 'Placeholder',
@@ -28,7 +28,10 @@ export default async function decorate(block) {
       menuItemEl.classList.add('commerce-account-sidebar-item-active');
     }
 
-    const iconEl = createMenuItemIcon(itemConfig.itemIcon);
+    const iconEl = itemConfig.itemIcon.startsWith('custom')
+      ? await createMenuItemIconCustom(itemConfig.itemIcon)
+      : createMenuItemIcon(itemConfig.itemIcon);
+
     const contentEl = createMenuItemContent(itemConfig.itemTitle, itemConfig.itemSubtitle);
     const arrowEl = createMenuItemArrow();
 
@@ -37,7 +40,7 @@ export default async function decorate(block) {
     menuItemEl.appendChild(arrowEl);
 
     return menuItemEl;
-  });
+  }));
 
   block.innerHTML = '';
   sidebarItems.forEach((el) => {
@@ -49,6 +52,41 @@ function createMenuItemIcon(iconSource) {
   const iconEl = document.createElement('div');
   iconEl.classList.add('commerce-account-sidebar-item-icon');
   accountRenderer.render(Icon, { source: iconSource, size: 32 })(iconEl);
+  return iconEl;
+}
+
+async function createMenuItemIconCustom(iconSource, size = 32) {
+  const iconEl = document.createElement('div');
+  const iconName = iconSource.split('custom-')[1] || 'default';
+  iconEl.classList.add('commerce-account-sidebar-item-icon', 'commerce-account-sidebar-item-icon--custom');
+
+  try {
+    const response = await fetch(`/icons/${iconName}.svg`);
+    if (!response.ok) throw new Error(`SVG not found: ${iconName}`);
+
+    const svgText = await response.text();
+
+    // Parse the SVG text into a DOM element so it can be manipulated with CSS
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+    const svgElement = svgDoc.querySelector('svg');
+
+    if (!svgElement) {
+      console.error('No <svg> element found in file.');
+    }
+
+    svgElement.setAttribute('width', size);
+    svgElement.setAttribute('height', size);
+
+    // Optionally clean up any hardcoded size in viewBox or CSS
+    svgElement.removeAttribute('style');
+
+    iconEl.appendChild(svgElement);
+  } catch (err) {
+    console.error('Error loading SVG icon:', err);
+    iconEl.textContent = '⚠️';
+  }
+
   return iconEl;
 }
 

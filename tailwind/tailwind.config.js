@@ -110,6 +110,6 @@ module.exports = {
     },
   },
   // eslint-disable-next-line global-require
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography')],
   content: ['../*.html', '../scripts/scripts.js', '../blocks/**/*.js'],
 };

@@ -1,0 +1,6 @@
+.commerce-account-sidebar-item-icon--custom {
+    & path {
+        fill: currentcolor;
+        stroke: transparent;
+    }
+}

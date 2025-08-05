@@ -1,4 +1,3 @@
-@import "tailwindcss/base";
 @import "base/structure.css";
 @import "base/dropins.css";
 
@@ -6,6 +5,7 @@
 @import "components/button.css" layer(components);
 @import "components/modal.css" layer(components);
 @import "components/nav.css" layer(components);
+@import "components/account.css" layer(components);
 
 /* EDS Block */
 @import "blocks/fragment.css";
