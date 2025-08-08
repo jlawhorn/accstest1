@@ -1,0 +1,25 @@
+.patients-list {
+    border: 1px solid var(--color-neutral-300);
+    border-radius: 8px;
+    padding: var(--spacing-medium);
+    list-style: none;
+}
+
+.patient-item + .patient-item {
+    margin-top: var(--spacing-small);
+}
+
+.patient-name,
+.patient-age,
+.patient-last-visit {
+    display: block;
+}
+
+.patient-name {
+    font-weight: bold;
+}
+
+.patient-last-visit {
+    color: var(--color-neutral-600);
+    font-size: 0.9em;
+}

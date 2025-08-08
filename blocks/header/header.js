@@ -395,8 +395,9 @@ export default async function decorate(block) {
         <div class="nav-auth-menu-panel nav-tools-panel">
           <div id="auth-dropin-container"></div>
           <ul class="authenticated-user-menu">
-             <li><a href="/customer/account">My Account</a></li>
-              <li><button>Logout</button></li>
+            <li><a href="/customer/account">My Account</a></li>
+            <li><a href="/customer/patients">Patients</a></li>
+            <li><button>Logout</button></li>
           </ul>
         </div>
      </div>`);
