@@ -23,3 +23,20 @@
     color: var(--color-neutral-600);
     font-size: 0.9em;
 }
+
+.message {
+    margin: var(--spacing-medium) 0;
+    padding: var(--spacing-medium);
+    font-weight: 700;
+    border: 1px solid currentcolor;
+}
+
+.message.success {
+    color: var(--color-positive-800);
+    background-color: var(--color-positive-200);
+}
+
+.message.error {
+    color: var(--color-alert-800);
+    background-color: var(--color-alert-200);
+}

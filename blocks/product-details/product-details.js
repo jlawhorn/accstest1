@@ -152,7 +152,14 @@ export default async function decorate(block) {
     })($gallery),
 
     // Header
-    pdpRendered.render(ProductHeader, { hideSku: true })($header),
+    pdpRendered.render(ProductHeader, {
+      hideSku: true,
+      slots: {
+        Heading: (headingCtx) => {
+          console.log('headingCtx', headingCtx);
+        },
+      },
+    })($header),
 
     // Price
     pdpRendered.render(ProductPrice, {})($price),
@@ -239,7 +246,7 @@ export default async function decorate(block) {
     () => {
       if (product) {
         setMetaTags(product);
-        document.title = product.name;
+        document.title = `Buy this ${product.name}`;
         $ratings.append(`${product.rating.average} stars average (out of ${product.rating.total} ratings)`);
       }
     },
